@@ -1,0 +1,38 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: HouseKeepingOrchestration
+  description: ASCEND HouseKeeping Service entry point used to submit requests to delete camaping tables
+paths:
+  /housekeeping:
+    post:
+      description: Submit a request to houseKeep an ASCEND table
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title : Input Schema
+              type: object
+              required:
+                - caller_id
+                - ascend_tag
+              properties:
+                caller_id:
+                  type: string
+                ascend_tag:
+                  type: object
+                  properties:
+                    application:
+                      type: string
+                    account_number:
+                      type: string
+                    client:
+                      type: string
+                    project:
+                      type: string
+                    team:
+                      type: string
+      responses:
+        '200':
+          description: Successful response
