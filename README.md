@@ -7,7 +7,7 @@ Housekeeping help us maintaining the Athena tables and S3 data created by the Ca
 ## Features:
 * Athena Tables/Views Deletion (including the deletion of S3 data)* 
 ## Release History
-* 0.1.o
+* 0.1.0
     * Beta release
 
 #### Local Setup
@@ -15,11 +15,11 @@ In order to build this module the following command has to be used:
 
 * Fork the project in bitbucket using the Bitbucket UI
 ```
-GIT URL:
+GIT URL: https://github.com/pmanchu5/cloud-housekeeping.git
 ```
 * Clone the repository in your local your git after fork
 ```
-ssh://git@giturl/housekeeping.git
+ssh://git@github.com/pmanchu5/cloud-housekeeping.git
 ```
 
 #### High Level Design
