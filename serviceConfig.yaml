@@ -1,0 +1,54 @@
+Tags:
+  Application: Housekeeping
+  Team: Sunrise
+  map-migrated: 'd-server-99jvhy60km3hdk'
+DeployEnvironment:
+  Test:
+    deployLambdaRole: arn:aws:iam::123456789123:role/LambdaAutomationRole
+    lambdaAlias: TEST
+    lambdas:
+      gvsu_housekeeping_orchestration:
+        Configuration:
+          Environment:
+            Variables:
+              ASCEND_HK_TABLE: ASCEND_HOUSEKEEPING_TEST
+              LOG_LEVEL: INFO
+          MemorySize: 128
+          Timeout: 300
+          Runtime: python3.8
+          Layers:
+              - arn:aws:lambda:us-east-1:123456789123:layer:python-watchtower:2
+              - arn:aws:lambda:us-east-1:123456789123:layer:python_requests:1
+              - arn:aws:lambda:us-east-1:123456789123:layer:python-s3fs:1
+              - arn:aws:lambda:us-east-1:123456789123:layer:gvsu_util:80
+
+      gvsu_housekeeping_compute:
+        Configuration:
+          Environment:
+            Variables:
+              ASCEND_HK_TABLE: ASCEND_HOUSEKEEPING_TEST
+              LOG_LEVEL: INFO
+              DELETE_LAMBDA: gvsu_housekeeping_delete:TEST
+          MemorySize: 128
+          Timeout: 900
+          Runtime: python3.8
+          Layers:
+              - arn:aws:lambda:us-east-1:123456789123:layer:python-watchtower:2
+              - arn:aws:lambda:us-east-1:123456789123:layer:python_requests:1
+              - arn:aws:lambda:us-east-1:123456789123:layer:python-s3fs:1
+              - arn:aws:lambda:us-east-1:123456789123:layer:gvsu_util:80
+      gvsu_housekeeping_delete:
+        Configuration:
+          Environment:
+            Variables:
+              ASCEND_HK_TABLE: ASCEND_HOUSEKEEPING_TEST
+              LOG_LEVEL: INFO
+          MemorySize: 128
+          Timeout: 900
+          Runtime: python3.8
+          Layers:
+              - arn:aws:lambda:us-east-1:123456789123:layer:python-watchtower:2
+              - arn:aws:lambda:us-east-1:123456789123:layer:python_requests:1
+              - arn:aws:lambda:us-east-1:123456789123:layer:python-s3fs:1
+              - arn:aws:lambda:us-east-1:123456789123:layer:gvsu_util:80
+  
